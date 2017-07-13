@@ -1,5 +1,6 @@
 # Algorithm Problem
 [![](https://d2gd6pc034wcta.cloudfront.net/images/logo.png)](https://www.acmicpc.net)
+[![](http://st.codeforces.com/s/37194/images/codeforces-logo-with-telegram.png)](http://codeforces.com)
 
 
 # Environment
@@ -16,4 +17,5 @@
 
 # Contact
 > - https://www.acmicpc.net/user/isku
-> - **email:** minho1a@hanmail.net
+> - http://codeforces.com/profile/isku
+> - **E-mail:** minho1a@hanmail.net
