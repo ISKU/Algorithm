@@ -1,7 +1,8 @@
 # Algorithm Problem
 [![](https://d2gd6pc034wcta.cloudfront.net/images/logo.png)](https://www.acmicpc.net)
-[![](http://st.codeforces.com/s/37194/images/codeforces-logo-with-telegram.png)](https://icpc.baylor.edu)
-[![](https://icpc.baylor.edu/img/icpc_gr.png)](http://codeforces.com)
+[![](http://st.codeforces.com/s/37194/images/codeforces-logo-with-telegram.png)](http://codeforces.com)
+[![](https://algospot.com/static/images/logo.png)](https://algospot.com/)
+[![](http://icpckorea.org/static/icpc-logo.png)](https://icpc.baylor.edu)
 [![](https://code.google.com/codejam/contest/static/logo_image1.gif)](https://code.google.com/codejam)
 
 
