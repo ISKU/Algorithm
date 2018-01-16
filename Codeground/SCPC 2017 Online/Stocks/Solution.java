@@ -9,7 +9,6 @@
 
 import java.util.*;
 import java.io.*;
-import java.math.*;
 
 public class Solution {
 	public static void main(String... args) throws IOException {
@@ -18,24 +17,25 @@ public class Solution {
 		int testCase = Integer.parseInt(input.readLine());
 
 		for (int tCase = 1; tCase <= testCase; tCase++) {
+			Integer.parseInt(input.readLine());
 			StringTokenizer parser = new StringTokenizer(input.readLine());
-			int previous = Integer.parseInt(parser.nextToken());
-			int answer = 0, ascending = 0;
+			int prev = Integer.parseInt(parser.nextToken());
+			int answer = 0, asc = 0;
 
 			while (parser.hasMoreTokens()) {
-				int current = Integer.parseInt(parser.nextToken());
+				int cur = Integer.parseInt(parser.nextToken());
 
-				if (previous < current)
-					ascending++;
+				if (prev < cur)
+					asc++;
 				else {
-					answer = (ascending > 0) ? answer + 1 : answer;
-					ascending = 0;
+					answer = (asc > 0) ? answer + 1 : answer;
+					asc = 0;
 				}
 
-				previous = current;
+				prev = cur;
 			}
 
-			output.write(String.format("Case #%d\n%d\n", tCase, ((ascending > 0) ? answer + 1 : answer) << 1));
+			output.write(String.format("Case #%d\n%d\n", tCase, ((asc > 0) ? answer + 1 : answer) * 2));
 		}
 
 		output.close();
