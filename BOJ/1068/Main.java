@@ -1,79 +1,53 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.03.26
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: February 05, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/1068
  */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
-	private static int count = 0;
+	private static ArrayList<Integer>[] graph;
+	private static int R, count;
 
-	public static void main(String args[]) {
-		Scanner input = new Scanner(System.in);
-		Node[] tree = new Node[input.nextInt()];
+	public static void main(String... args) {
+		Scanner sc = new Scanner(System.in);
+		int V = sc.nextInt();
 
-		for (int i = 0; i < tree.length; i++)
-			tree[i] = new Node(i);
+		graph = new ArrayList[V];
+		for (int i = 0; i < V; i++)
+			graph[i] = new ArrayList<Integer>();
 
-		int root = -1;
-		for (int i = 0; i < tree.length; i++) {
-			int parent = input.nextInt();
-			tree[i].parent = parent;
-
+		int root = 0;
+		for (int i = 0; i < V; i++) {
+			int parent = sc.nextInt();
 			if (parent == -1)
 				root = i;
-			else {
-				if (tree[parent].left == null)
-					tree[parent].left = tree[i];
-				else
-					tree[parent].right = tree[i];
+			else
+				graph[parent].add(i);
+		}
+
+		R = sc.nextInt();
+		if (R != root)
+			dfs(root);
+
+		System.out.print(count);
+	}
+
+	private static void dfs(int vertex) {
+		for (int to : graph[vertex]) {
+			if (to == R) {
+				if (graph[vertex].size() == 1)
+					count++;
+			} else {
+				if (graph[to].size() == 0)
+					count++;
+				dfs(to);
 			}
-		}
-
-		int remove = input.nextInt();
-
-		if (tree[remove].parent == -1)
-			tree[remove] = null;
-		else if (tree[tree[remove].parent].left != null && tree[tree[remove].parent].left.index == remove)
-			tree[tree[remove].parent].left = null;
-		else if (tree[tree[remove].parent].right != null && tree[tree[remove].parent].right.index == remove)
-			tree[tree[remove].parent].right = null;
-
-		if (tree[root] == null)
-			System.out.print(0);
-		else if (tree[root].left == null && tree[root].right == null)
-			System.out.print(1);
-		else {
-			prefix(tree[root]);
-			System.out.print(count);
-		}
-	}
-
-	private static void prefix(Node node) {
-		if (node.left == null && node.right == null) {
-			count++;
-			return;
-		}
-
-		if (node.left != null)
-			prefix(node.left);
-		if (node.right != null)
-			prefix(node.right);
-	}
-
-	private static class Node {
-		public int index;
-		public int parent;
-		public Node left;
-		public Node right;
-
-		public Node(int index) {
-			this.index = index;
 		}
 	}
 }
