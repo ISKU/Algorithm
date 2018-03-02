@@ -12,15 +12,17 @@ import java.io.*;
 
 public class Main {
 
-	private static int[] parent;
-	private static int[] roots;
+	private static int[] parent, count;
+	private static int[][] dp;
+	private static ArrayList<Integer> roots;
+	private static int K;
 
 	public static void main(String... args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.parseInt(st.nextToken());
 		int M = Integer.parseInt(st.nextToken());
-		int K = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
 
 		parent = new int[N + 1];
 		for (int i = 1; i <= N; i++)
@@ -31,21 +33,38 @@ public class Main {
 			parent[find(Integer.parseInt(st.nextToken()))] = find(Integer.parseInt(st.nextToken()));
 		}
 
-		roots = new int[N + 1];
+		count = new int[N + 1];
 		for (int i = 1; i <= N; i++)
-			roots[find(i)]++;
+			count[find(i)]++;
 
-		int set = 0;
+		roots = new ArrayList<Integer>();
 		for (int i = 1; i <= N; i++)
-			if (roots[i] != 0)
-				set++;
+			if (count[i] != 0)
+				roots.add(count[i]);
 
-		System.out.print((set == 1) ? "DOOMED" : "SAFE");
+		dp = new int[roots.size()][1001];
+		for (int i = 0; i < dp.length; i++)
+			Arrays.fill(dp[i], -1);
+		System.out.print((roots.size() == 1) ? "DOOMED" : (dfs(0, 0) == 1) ? "SAFE" : "DOOMED");
 	}
 
 	private static int find(int v) {
 		if (parent[v] != v)
 			return parent[v] = find(parent[v]);
 		return v;
+	}
+
+	private static int dfs(int i, int value) {
+		if (value == K)
+			return 1;
+		if (value > K)
+			return 0;
+		if (i == roots.size())
+			return 0;
+		if (dp[i][value] != -1)
+			return dp[i][value];
+
+		dp[i][value] = dfs(i + 1, value + roots.get(i)) | dfs(i + 1, value);
+		return dp[i][value];
 	}
 }
