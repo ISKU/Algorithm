@@ -1,38 +1,30 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2016.08.18
- * email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: April 4, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/1003
  */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-
-	private static int countCallZero = 0;
-	private static int countCallOne = 0;
-
 	public static void main(String args[]) {
-		Scanner input = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
+		int[] zero = new int[41];
+		int[] one = new int[41];
+		zero[0] = one[1] = 1;
 
-		for (int testCase = input.nextInt(); testCase > 0; testCase--) {
-			countCallZero = countCallOne = 0;
-			fibonacci(input.nextInt());
-			System.out.println(countCallZero + " " + countCallOne);
+		for (int i = 2; i <= 40; i++) {
+			zero[i] = zero[i - 1] + zero[i - 2];
+			one[i] = one[i - 1] + one[i - 2];
 		}
-	}
 
-	private static int fibonacci(int n) {
-		if (n == 0) {
-			countCallZero++;
-			return 0;
-		} else if (n == 1) {
-			countCallOne++;
-			return 1;
-		} else {
-			return fibonacci(n - 1) + fibonacci(n - 2);
+		int T = sc.nextInt();
+		while (T-- > 0) {
+			int n = sc.nextInt();
+			System.out.printf("%d %d\n", zero[n], one[n]);
 		}
 	}
 }
