@@ -1,4 +1,4 @@
-# Algorithm Problem
+# Algorithmic Problem
 [![](https://d2gd6pc034wcta.cloudfront.net/images/logo.png)](https://www.acmicpc.net)
 [![](http://st.codeforces.com/s/37194/images/codeforces-logo-with-telegram.png)](http://codeforces.com)
 [![](https://algospot.com/static/images/logo.png)](https://algospot.com/)
@@ -30,4 +30,4 @@ Handle
 Contact
 ----------
 > - Minho Kim ([ISKU](https://github.com/ISKU))
-> - **E-mail:** minho1a@hanmail.net
+> - **E-mail:** minho.kim093@gmail.com
