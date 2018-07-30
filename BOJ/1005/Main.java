@@ -1,6 +1,6 @@
 /*
  * Author: Minho Kim (ISKU)
- * Date: February 04, 2018
+ * Date: July 30, 2018
  * E-mail: minho.kim093@gmail.com
  *
  * https://github.com/ISKU/Algorithm
@@ -19,11 +19,10 @@ public class Main {
 	public static void main(String... args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int testCase = Integer.parseInt(st.nextToken());
+		int testCase = Integer.parseInt(br.readLine());
 
 		while (testCase-- > 0) {
-			st = new StringTokenizer(br.readLine());
+			StringTokenizer st = new StringTokenizer(br.readLine());
 			V = Integer.parseInt(st.nextToken());
 			E = Integer.parseInt(st.nextToken());
 
@@ -37,27 +36,27 @@ public class Main {
 
 			while (E-- > 0) {
 				st = new StringTokenizer(br.readLine());
-				int first = Integer.parseInt(st.nextToken());
-				int second = Integer.parseInt(st.nextToken());
-				graph[second].add(first);
+				int v = Integer.parseInt(st.nextToken());
+				int u = Integer.parseInt(st.nextToken());
+				graph[u].add(v);
 			}
 
 			dp = new int[V + 1];
-			bw.write(String.valueOf(dfs(Integer.parseInt(br.readLine()))));
-			bw.newLine();
+			Arrays.fill(dp, -1);
+			bw.write(dfs(Integer.parseInt(br.readLine())) + "\n");
 		}
 
 		bw.close();
 	}
 
-	private static int dfs(int vertex) {
-		if (dp[vertex] != 0)
-			return dp[vertex];
+	private static int dfs(int u) {
+		if (dp[u] != -1)
+			return Math.max(dp[u], cost[u]);
 
-		dp[vertex] = cost[vertex];
-		for (int to : graph[vertex])
-			dp[vertex] = Math.max(dp[vertex], dfs(to) + cost[vertex]);
+		dp[u] = 0;
+		for (int v : graph[u])
+			dp[u] = Math.max(dp[u], dfs(v) + cost[u]);
 
-		return dp[vertex];
+		return Math.max(dp[u], cost[u]);
 	}
 }
