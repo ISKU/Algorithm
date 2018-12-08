@@ -1,43 +1,88 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2016.08.22
- * email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: December 8, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/1395
  */
 
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String args[]) throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder output = new StringBuilder();
-		StringTokenizer parser = new StringTokenizer(input.readLine());
-		int numberOfSwitchs = Integer.parseInt(parser.nextToken());
-		int work = Integer.parseInt(parser.nextToken());
-		int[] arraySwitch = new int[numberOfSwitchs + 1];
 
-		for (int count = 0; count < work; count++) {
-			parser = new StringTokenizer(input.readLine());
-			String task = parser.nextToken();
-			int startIndex = Integer.parseInt(parser.nextToken());
-			int endIndex = Integer.parseInt(parser.nextToken());
+	private static int[] tree;
+	private static boolean[] lazy;
+	private static int H;
 
-			if (task.equals("0")) {
-				for (int index = startIndex; index <= endIndex; index++)
-					arraySwitch[index]++;
-			} else {
-				int OnStateSwitchs = 0;
-				for (int index = startIndex; index <= endIndex; index++)
-					OnStateSwitchs += arraySwitch[index] & 1;
-				output.append(OnStateSwitchs + "\n");
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+
+		H = 1 << (int) Math.ceil(Math.log(N) / Math.log(2));
+		tree = new int[H * 2];
+		lazy = new boolean[H * 2];
+
+		while (M-- > 0) {
+			st = new StringTokenizer(br.readLine());
+			int o = Integer.parseInt(st.nextToken());
+			int s = Integer.parseInt(st.nextToken());
+			int t = Integer.parseInt(st.nextToken());
+
+			if (o == 0)
+				update(1, H, 1, s, t);
+			if (o == 1) {
+				bw.write(String.valueOf(sum(1, H, 1, s, t)));
+				bw.write('\n');
 			}
 		}
 
-		System.out.print(output);
+		bw.close();
+	}
+
+	private static int sum(int l, int r, int i, int L, int R) {
+		propagate(l, r, i);
+
+		if (r < L || R < l)
+			return 0;
+		if (L <= l && r <= R)
+			return tree[i];
+
+		int mid = (l + r) / 2;
+		return sum(l, mid, i * 2, L, R) + sum(mid + 1, r, i * 2 + 1, L, R);
+	}
+
+	private static void update(int l, int r, int i, int L, int R) {
+		propagate(l, r, i);
+
+		if (r < L || R < l)
+			return;
+		if (L <= l && r <= R) {
+			lazy[i] = !lazy[i];
+			propagate(l, r, i);
+			return;
+		}
+
+		int mid = (l + r) / 2;
+		update(l, mid, i * 2, L, R);
+		update(mid + 1, r, i * 2 + 1, L, R);
+		tree[i] = tree[i * 2] + tree[i * 2 + 1];
+	}
+
+	private static void propagate(int l, int r, int i) {
+		if (!lazy[i])
+			return;
+
+		if (i < H) {
+			lazy[i * 2] ^= lazy[i];
+			lazy[i * 2 + 1] ^= lazy[i];
+		}
+
+		tree[i] = Math.abs(tree[i] - (r - l + 1));
+		lazy[i] = !lazy[i];
 	}
 }
