@@ -1,8 +1,8 @@
-/* 
+/*
  * Author: Minho Kim (ISKU)
- * Date: 2017.07.21
- * E-mail: minho1a@hanmail.net
- * 
+ * Date: December 8, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/1613
  */
@@ -11,67 +11,39 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
 
-	private static ArrayList<ArrayList<Integer>> graph;
-	private static ArrayList<ArrayList<Integer>> reverse;
-	private static boolean[] visited;
-	private static int answer;
-	private static boolean out;
-
-	public static void main(String... args) throws Exception {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter output = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer parser = new StringTokenizer(input.readLine());
-		int n = Integer.parseInt(parser.nextToken()) + 1;
-		int k = Integer.parseInt(parser.nextToken());
-
-		graph = new ArrayList<ArrayList<Integer>>();
-		reverse = new ArrayList<ArrayList<Integer>>();
-		for (int i = 0; i < n; i++) {
-			graph.add(new ArrayList<Integer>());
-			reverse.add(new ArrayList<Integer>());
+		int[][] floyd = new int[N + 1][N + 1];
+		while (K-- > 0) {
+			st = new StringTokenizer(br.readLine());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			floyd[u][v] = -1;
+			floyd[v][u] = 1;
 		}
 
-		while (k-- > 0) {
-			parser = new StringTokenizer(input.readLine());
-			int first = Integer.parseInt(parser.nextToken());
-			int second = Integer.parseInt(parser.nextToken());
-			graph.get(first).add(second);
-			reverse.get(second).add(first);
+		for (int k = 1; k <= N; k++)
+			for (int u = 1; u <= N; u++)
+				for (int v = 1; v <= N; v++)
+					if (floyd[u][k] == -1 && floyd[k][v] == -1) {
+						floyd[u][v] = -1;
+						floyd[v][u] = 1;
+					}
+
+		int S = Integer.parseInt(br.readLine());
+		while (S-- > 0) {
+			st = new StringTokenizer(br.readLine());
+			int u = Integer.parseInt(st.nextToken());
+			int v = Integer.parseInt(st.nextToken());
+			bw.write(String.valueOf(floyd[u][v]));
+			bw.write('\n');
 		}
 
-		int s = Integer.parseInt(input.readLine());
-		while (s-- > 0) {
-			parser = new StringTokenizer(input.readLine());
-			int first = Integer.parseInt(parser.nextToken());
-			int second = Integer.parseInt(parser.nextToken());
-
-			answer = 0;
-			boolean[] oper = new boolean[] { true, false };
-			for (int i = 0; i < oper.length; i++) {
-				if (answer == 0) {
-					out = false;
-					visited = new boolean[n];
-					dfs(first, second, oper[i]);
-				}
-			}
-
-			output.write(String.format("%d\n", answer));
-		}
-
-		output.close();
-	}
-
-	private static void dfs(int src, int goal, boolean direction) {
-		if (out || src == goal) {
-			answer = (direction) ? -1 : 1;
-			out = true;
-			return;
-		}
-
-		visited[src] = true;
-		for (int sink : (direction) ? graph.get(src) : reverse.get(src))
-			if (!visited[sink])
-				dfs(sink, goal, direction);
+		bw.close();
 	}
 }
