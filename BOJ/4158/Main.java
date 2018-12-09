@@ -1,34 +1,41 @@
-/* 
+/*
  * Author: Minho Kim (ISKU)
- * Date: 2017.08.15
- * E-mail: minho1a@hanmail.net
- * 
+ * Date: December 8, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/4158
  */
 
 import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String... args) {
-		Scanner input = new Scanner(System.in);
+
+	public static void main(String... args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		while (true) {
-			int N = input.nextInt();
-			int M = input.nextInt();
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int N = Integer.parseInt(st.nextToken());
+			int M = Integer.parseInt(st.nextToken());
 			if (N == 0 && M == 0)
 				break;
 
-			HashSet<Integer> set = new HashSet<Integer>();
-			while (N-- > 0)
-				set.add(input.nextInt());
-
+			Set<Integer> set = new HashSet<>();
 			int count = 0;
-			while (M-- > 0)
-				if (set.contains(input.nextInt()))
+
+			for (int i = 0; i < N; i++)
+				set.add(Integer.parseInt(br.readLine()));
+			for (int i = 0; i < M; i++)
+				if (set.contains(Integer.parseInt(br.readLine())))
 					count++;
 
-			System.out.println(count);
+			bw.write(String.valueOf(count));
+			bw.write('\n');
 		}
+
+		bw.close();
 	}
 }
