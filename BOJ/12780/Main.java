@@ -1,26 +1,31 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.02.11
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: December 18, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/12780
  */
 
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-	public static void main(String... args) {
-		Scanner input = new Scanner(System.in);
-		String H = input.nextLine();
-		String N = input.nextLine();
-		int count = 0;
+	public static void main(String... args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String H = br.readLine();
+		String N = br.readLine();
 
-		while (H.contains(N)) {
-			H = H.replaceFirst(N, "");
+		int count = 0;
+		int i = 0;
+		while (true) {
+			i = H.indexOf(N, i);
+			if (i == -1)
+				break;
+
+			i += N.length();
 			count++;
 		}
 
-		System.out.println(count);
+		System.out.print(count);
 	}
 }
