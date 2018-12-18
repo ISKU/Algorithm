@@ -1,30 +1,36 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.04.09
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: December 18, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/10816
  */
 
-import java.util.Scanner;
-import java.util.HashMap;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String... args) {
-		Scanner input = new Scanner(System.in);
-		HashMap<Integer, Integer> table = new HashMap<Integer, Integer>();
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		Map<Integer, Integer> table = new HashMap();
 
-		int N = input.nextInt();
+		int N = Integer.parseInt(br.readLine());
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		while (N-- > 0) {
-			int number = input.nextInt();
-			table.put(number, table.containsKey(number) ? table.get(number) + 1 : 1);
+			int n = Integer.parseInt(st.nextToken());
+			table.put(n, table.containsKey(n) ? table.get(n) + 1 : 1);
 		}
 
-		int M = input.nextInt();
+		int M = Integer.parseInt(br.readLine());
+		st = new StringTokenizer(br.readLine());
 		while (M-- > 0) {
-			int number = input.nextInt();
-			System.out.printf("%d ", table.containsKey(number) ? table.get(number) : 0);
+			int n = Integer.parseInt(st.nextToken());
+			bw.write(String.valueOf(table.containsKey(n) ? table.get(n) : Integer.valueOf(0)));
+			bw.write(' ');
 		}
+
+		bw.close();
 	}
 }
