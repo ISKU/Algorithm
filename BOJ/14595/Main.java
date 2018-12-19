@@ -1,46 +1,38 @@
-/* 
+/*
  * Author: Minho Kim (ISKU)
- * Date: 2017.12.29
- * E-mail: minho1a@hanmail.net
- * 
+ * Date: December 19, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/14595
  */
 
 import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String... args) {
-		Scanner input = new Scanner(System.in);
-		int N = input.nextInt();
-		int M = input.nextInt();
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
+		int[] room = new int[N + 1];
 
-		int[] club = new int[N];
-		for (int i = 0; i < club.length; i++)
-			club[i] = i;
-
+		int M = Integer.parseInt(br.readLine());
 		while (M-- > 0) {
-			int start = input.nextInt() - 1;
-			int end = input.nextInt() - 1;
-			int endR = ((end + 1) < N) ? club[end + 1] : 0;
-
-			if (endR != 0 && club[end] == endR) {
-				for (int i = end; i < N; i++) {
-					if (club[i] == endR)
-						club[i] = club[start];
-					else
-						break;
-				}
-			}
-
-			for (int i = start; i <= end; i++)
-				club[i] = club[start];
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int x = Integer.parseInt(st.nextToken());
+			int y = Integer.parseInt(st.nextToken());
+			room[x]++;
+			room[y]--;
 		}
 
-		HashSet<Integer> set = new HashSet<Integer>();
-		for (int i : club)
-			set.add(i);
+		int count = N;
+		int sum = 0;
+		for (int i = 1; i <= N; i++) {
+			sum += room[i];
+			if (sum > 0)
+				count--;
+		}
 
-		System.out.print(set.size());
+		System.out.print(count);
 	}
 }
