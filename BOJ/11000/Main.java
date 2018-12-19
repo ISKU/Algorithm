@@ -1,64 +1,52 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.02.23
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: December 19, 2018
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/11000
  */
 
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-import java.util.Arrays;
+import java.util.*;
+import java.io.*;
 
 public class Main {
-	public static void main(String... args) throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer parser = new StringTokenizer(input.readLine());
-		int N = Integer.parseInt(parser.nextToken());
-		Node[] array = new Node[N * 2];
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine());
 
+		Data[] datas = new Data[N];
 		for (int i = 0; i < N; i++) {
-			parser = new StringTokenizer(input.readLine());
-			array[i] = new Node(Integer.parseInt(parser.nextToken()), 1);
-			array[N + i] = new Node(Integer.parseInt(parser.nextToken()), -1);
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int s = Integer.parseInt(st.nextToken());
+			int e = Integer.parseInt(st.nextToken());
+			datas[i] = new Data(s, e);
+		}
+		Arrays.sort(datas, new Comparator<Data>() {
+			@Override
+			public int compare(Data o1, Data o2) {
+				if (o1.s == o2.s)
+					return Integer.compare(o1.e, o2.e);
+				return Integer.compare(o1.s, o2.s);
+			}
+		});
+
+		Queue<Integer> pq = new PriorityQueue<>();
+		for (int i = 0; i < N; i++) {
+			if (!pq.isEmpty() && pq.peek() <= datas[i].s)
+				pq.poll();
+			pq.add(datas[i].e);
 		}
 
-		Arrays.sort(array);
-		int max = 0;
-		for (int i = 0, sum = 0; i < array.length; i++) {
-			sum += array[i].second;
-			max = Math.max(max, sum);
-		}
-
-		System.out.println(max);
+		System.out.print(pq.size());
 	}
 
-	private static class Node implements Comparable<Node> {
-		public int first;
-		public int second;
+	private static class Data {
+		public int s, e;
 
-		public Node(int start, int end) {
-			this.first = start;
-			this.second = end;
-		}
-
-		@Override
-		public int compareTo(Node o) {
-			if (this.first < o.first)
-				return -1;
-			else if (this.first > o.first)
-				return 1;
-			else {
-				if (this.second < o.second)
-					return -1;
-				else if (this.second > o.second)
-					return 1;
-				else
-					return 0;
-			}
+		public Data(int s, int e) {
+			this.s = s;
+			this.e = e;
 		}
 	}
 }
