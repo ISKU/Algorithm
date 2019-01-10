@@ -1,28 +1,28 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2016.09.24
- * email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: January 10, 2019
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/10984
  */
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 	public static void main(String args[]) {
-		Scanner input = new Scanner(System.in);
-		int testCase = input.nextInt();
+		Scanner sc = new Scanner(System.in);
+		int tc = sc.nextInt();
 
-		while (testCase-- > 0) {
-			int subjects = input.nextInt();
+		while (tc-- > 0) {
+			int N = sc.nextInt();
 			int credit = 0;
-			float grade = 0;
+			double grade = 0;
 
-			for (int count = 0; count < subjects; count++) {
-				int tempCredit = input.nextInt();
-				credit += tempCredit;
-				grade += tempCredit * input.nextFloat();
+			for (int i = 0; i < N; i++) {
+				int temp = sc.nextInt();
+				credit += temp;
+				grade += temp * sc.nextFloat();
 			}
 
 			System.out.printf("%d %.1f\n", credit, grade / credit);
