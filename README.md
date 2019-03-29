@@ -8,26 +8,26 @@
 
 Environment
 ----------
-> **Java:**
-> - **Compiler Options:**  javac -J-Xms128m -J-Xmx512m -encoding UTF-8 Main.java
-> - **Version:**  1.8.0_91
-> - **Time Limit:**  +5s
-> - **Memory Limit:**  +512MB
+**Java:**
+- **Compiler Options:**  javac -J-Xms128m -J-Xmx512m -encoding UTF-8 Main.java
+- **Version:**  1.8.0_91
+- **Time Limit:**  +5s
+- **Memory Limit:**  +512MB
 
 
 License
 ----------
-> - [MIT](LICENSE)
+- [MIT](LICENSE)
 
 
 Handle
 ----------
-> - [isku@BOJ](https://www.acmicpc.net/user/isku)
-> - [isku@Codeforces](http://codeforces.com/profile/isku)
-> - [isku@Algospot](https://algospot.com/user/profile/25929)
+- [isku@BOJ](https://www.acmicpc.net/user/isku)
+- [isku@Codeforces](http://codeforces.com/profile/isku)
+- [isku@Algospot](https://algospot.com/user/profile/25929)
 
 
 Contact
 ----------
-> - Minho Kim ([ISKU](https://github.com/ISKU))
-> - **E-mail:** minho.kim093@gmail.com
+- Minho Kim ([ISKU](https://github.com/ISKU))
+- **E-mail:** minho.kim093@gmail.com
