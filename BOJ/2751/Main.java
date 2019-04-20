@@ -1,31 +1,29 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2016.08.08
- * email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: April 20, 2019
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/2751
  */
 
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String args[]) throws IOException {
-		BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
-		StringBuilder output = new StringBuilder();
-		int arraySize = Integer.parseInt(input.readLine());
-		int[] arrayNumber = new int[arraySize];
+	public static void main(String args[]) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int N = Integer.parseInt(br.readLine());
 
-		for (int index = 0; index < arraySize; index++)
-			arrayNumber[index] = Integer.parseInt(input.readLine());
+		Integer[] array = new Integer[N];
+		for (int i = 0; i < N; i++)
+			array[i] = Integer.parseInt(br.readLine());
 
-		Arrays.sort(arrayNumber);
+		Arrays.sort(array);
 
-		for (int index = 0; index < arraySize; index++)
-			output.append(arrayNumber[index] + "\n");
-		System.out.println(output);
+		for (int i = 0; i < N; i++)
+			bw.write(array[i] + "\n");
+		bw.close();
 	}
 }
