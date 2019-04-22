@@ -1,38 +1,41 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.03.30
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: April 22, 2019
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/13199
  */
 
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String args[]) {
-		Scanner input = new Scanner(System.in);
-		int testCase = input.nextInt();
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		int T = Integer.parseInt(br.readLine());
 
-		while (testCase-- > 0) {
-			int p = input.nextInt();
-			int m = input.nextInt();
-			int f = input.nextInt();
-			int c = input.nextInt();
+		while (T-- > 0) {
+			StringTokenizer st = new StringTokenizer(br.readLine());
+			int P = Integer.parseInt(st.nextToken());
+			int M = Integer.parseInt(st.nextToken());
+			int F = Integer.parseInt(st.nextToken());
+			int C = Integer.parseInt(st.nextToken());
 
-			int count = 0, coupon = 0;
-			coupon = (m / p) * c;
-			coupon = ((coupon / f) * c) + (coupon % f);
+			int A = M / P;
+			int B = M / P;
+			int count = M / P;
+			int countA = count * C;
+			int countB = count * C;
 
-			while (coupon > 0) {
-				if (coupon / f > 0) {
-					count += coupon / f;
-					coupon = ((coupon / f) * c) + (coupon % f);
-				} else
-					coupon = coupon / f;
-			}
+			A += countA / F;
+			if (countB - F >= 0)
+				B += (countB - F) / (F - C) + 1;
 
-			System.out.println(count);
+			bw.write((B - A) + "\n");
 		}
+
+		bw.close();
 	}
 }
