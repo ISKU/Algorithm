@@ -1,4 +1,4 @@
-# Algorithmic Problem
+# Algorithmic Problem Solving
 [![](https://d2gd6pc034wcta.cloudfront.net/images/logo.png)](https://www.acmicpc.net)
 [![](http://st.codeforces.com/s/37194/images/codeforces-logo-with-telegram.png)](http://codeforces.com)
 [![](https://algospot.com/static/images/logo.png)](https://algospot.com/)
