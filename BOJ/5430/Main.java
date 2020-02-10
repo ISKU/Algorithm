@@ -1,62 +1,69 @@
-/* 
- * Author: Kim Min-Ho (ISKU)
- * Date: 2017.03.05
- * Email: minho1a@hanmail.net
- * 
+/*
+ * Author: Minho Kim (ISKU)
+ * Date: February 10, 2020
+ * E-mail: minho.kim093@gmail.com
+ *
  * https://github.com/ISKU/Algorithm
  * https://www.acmicpc.net/problem/5430
  */
 
-import java.util.Scanner;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String... args) {
-		Scanner input = new Scanner(System.in);
-		int testCase = input.nextInt();
+	public static void main(String... args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
-		while (testCase-- > 0) {
-			char[] command = input.next().toCharArray();
-			int size = input.nextInt();
-			ArrayList<Integer> array = new ArrayList<Integer>();
-			String[] value = input.next().replaceAll("\\[|\\]", "").split(",");
+		int T = Integer.parseInt(br.readLine());
+		while (T-- > 0) {
+			char[] commands = br.readLine().toCharArray();
+			int N = Integer.parseInt(br.readLine());
 
-			for (int i = 0; i < size; i++)
-				array.add(Integer.parseInt(value[i]));
+			StringTokenizer st = new StringTokenizer(br.readLine(), "[],");
+			int[] array = new int[N];
+			for (int i = 0; i < N; i++)
+				array[i] = Integer.parseInt(st.nextToken());
 
-			boolean reverse = true;
-			boolean check = false;
-			for (int i = 0; i < command.length; i++) {
-				if (command[i] == 'R')
+			boolean reverse = false;
+			boolean error = false;
+			int front = 0;
+			int rear = N - 1;
+			for (char c : commands) {
+				if (c == 'R')
 					reverse = !reverse;
+				if (c == 'D') {
+					if (reverse)
+						rear--;
+					else
+						front++;
 
-				if (command[i] == 'D') {
-					if (array.size() != 0) {
-						if (reverse)
-							array.remove(0);
-						else
-							array.remove(array.size() - 1);
-					} else {
-						check = true;
+					if (rear - front < -1) {
+						error = true;
 						break;
 					}
 				}
 			}
 
-			if (check)
-				System.out.println("error");
-			else {
+			if (error) {
+				bw.write("error\n");
+			} else {
+				bw.write('[');
 				if (reverse) {
-					System.out.print("[" + (array.size() != 0 ? array.get(0) : ""));
-					for (int i = 1; i < array.size(); i++)
-						System.out.print("," + array.get(i));
+					if (front <= rear)
+						bw.write(String.valueOf(array[rear]));
+					for (int i = rear - 1; i >= front; i--)
+						bw.write("," + array[i]);
 				} else {
-					System.out.print("[" + (array.size() != 0 ? array.get(array.size() - 1) : ""));
-					for (int i = array.size() - 2; i >= 0; i--)
-						System.out.print("," + array.get(i));
+					if (front <= rear)
+						bw.write(String.valueOf(array[front]));
+					for (int i = front + 1; i <= rear; i++)
+						bw.write("," + array[i]);
 				}
-				System.out.println("]");
+				bw.write("]\n");
 			}
 		}
+
+		bw.close();
 	}
 }
