@@ -21,6 +21,9 @@ License
 Handle
 ----------
 - [isku@BOJ](https://www.acmicpc.net/user/isku)
+
+[![http://mazassumnida.wtf/api/generate_badge?boj=isku](http://mazassumnida.wtf/api/generate_badge)](https://solved.ac/isku)
+
 - [isku@Codeforces](http://codeforces.com/profile/isku)
 - [isku@Algospot](https://algospot.com/user/profile/25929)
 
