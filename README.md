@@ -25,6 +25,10 @@ Handle
 [![http://mazassumnida.wtf/api/generate_badge?boj=isku](http://mazassumnida.wtf/api/generate_badge?boj=isku)](https://solved.ac/isku) (by. [mazassumnida](https://github.com/mazassumnida/mazassumnida))
 
 - [isku@Codeforces](http://codeforces.com/profile/isku)
+
+[![https://cf.leed.at?id=isku](https://cf.leed.at?id=isku)](https://codeforces.com/profile/isku) (by. [mazacofo](https://github.com/mazassumnida/mazacofo))
+
+
 - [isku@Algospot](https://algospot.com/user/profile/25929)
 
 
